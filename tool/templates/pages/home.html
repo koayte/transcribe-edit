@@ -1,11 +1,53 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h2>{% block title %}Home{% endblock title %}</h2>
+  <h2>{% block title %}Step 1: Record or Upload Audio{% endblock title %}</h2>
 {% endblock header %}
 
+{% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+        console.log("Hello world!");
+    </script>
+{% endblock scripts %}
+
 {% block content %}
-  <p>
-    Learn more about this project by visiting the <a href="{{ url_for('pages.about') }}">About page</a>.
-  </p>
+    <div class="audio">
+        <div class="record card">
+            <img src="{{ url_for('static', filename='home-audio-mic.png') }}">
+            <div>
+                <h3>Record</h3>
+                <p>Enable browser access to your microphone.</p>
+            </div>
+        </div>
+
+        <div class="upload card">
+            <img src="{{ url_for('static', filename='home-audio-upload.png') }}">
+            <div>
+                <h3>Upload</h3>
+                <p>File formats: .mp3</p>
+                <form action="/upload", method="post" enctype="multipart/form-data">
+                    <input type="file" name="audio-file"/>
+                    <input type="submit" value="Submit"/>
+                </form>
+                <p class="warning">{{ warning }}</p>
+            </div>
+            
+        </div>
+    </div>
+    <!-- <div class="content transcribe">
+        <h3>Transcribe</h3>
+    </div>
+    <div class="content paragraph-breaks">
+        <h3>Add paragraph breaks</h3>
+    </div>
+    <div class="content edit">
+        <h3>Edit</h3>
+    </div>
+    <div>
+        <p>
+            AI Assistant Response: {{ content }}
+            Learn more about this project by visiting the <a href="{{ url_for('pages.past') }}">Past Recordings page</a>. 
+        </p> 
+    </div> -->
+    
 {% endblock content %}

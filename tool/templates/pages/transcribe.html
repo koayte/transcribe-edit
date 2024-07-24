@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h2>{% block title %}Step 2: Transcribe{% endblock title %}</h2>
+{% endblock header %}
+
+
+{% block content %}
+    <p>Transcription results:</p>
+    <p>{{ transcription }}</p>
+    <!-- <div class="content transcribe">
+        <h3>Transcribe</h3>
+    </div>
+    <div class="content paragraph-breaks">
+        <h3>Add paragraph breaks</h3>
+    </div>
+    <div class="content edit">
+        <h3>Edit</h3>
+    </div>
+    <div>
+        <p>
+            AI Assistant Response: {{ content }}
+            Learn more about this project by visiting the <a href="{{ url_for('pages.past') }}">Past Recordings page</a>. 
+        </p> 
+    </div> -->
+    
+{% endblock content %}
