@@ -4,10 +4,29 @@
   <h2>{% block title %}Step 2: Transcribe{% endblock title %}</h2>
 {% endblock header %}
 
+{% block scripts %}
+    <script>
+        function copyToClipboard() {
+            var copyText = document.getElementById("transcriptionResults");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value);
+            
+        }
+    </script>
+{% endblock scripts %}
 
 {% block content %}
     <p>Transcription results:</p>
-    <p>{{ transcription }}</p>
+    <div class="transcribe-container">
+        <div class="text-container">
+            <textarea id="transcriptionResults"
+                  rows = "10">{{ transcription }}</textarea>
+        </div>
+        <button class="copy-button" onclick="copyToClipboard()">Copy</button>
+    </div>
+    
+    
     <!-- <div class="content transcribe">
         <h3>Transcribe</h3>
     </div>
