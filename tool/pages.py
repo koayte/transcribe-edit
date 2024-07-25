@@ -77,6 +77,20 @@ def edit():
         return render_template("pages/edit.html", transcript_res=transcript_res)
     else: 
         return ('', 204) # return the HTTP 'empty response' response, 204 No Content
+    
+@bp.route("/edit-results", methods = ['GET', 'POST'])
+def editResults(): 
+    if 'editSubmit' in request.form: 
+        if request.form.get('para') and request.form.get('error'):
+            return 'both'
+        elif request.form.get('para'):
+            return 'para'
+        elif request.form.get('error'):
+            return 'error'
+        else:
+            return 'nothing selected'
+    else:
+        return ('', 204)
 
 @bp.route("/past")
 def past():
