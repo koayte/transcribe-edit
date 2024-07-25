@@ -13,6 +13,13 @@
             navigator.clipboard.writeText(copyText.value);
             document.getElementById("copyAlert").textContent = "Text copied to clipboard."
         }
+        
+        function textChanges() {
+            var copyAlert = document.getElementById("copyAlert");
+            if (copyAlert.textContent != "") {
+                copyAlert.textContent = "";
+            }
+        }
     </script>
 {% endblock scripts %}
 
@@ -20,7 +27,7 @@
     <p>Transcription results:</p>
     <div class="transcribe-container">
         <div class="text-container">
-            <textarea id="transcriptionResults"
+            <textarea id="transcriptionResults" oninput="textChanges()"
                   rows = "10">{{ transcription }}</textarea>
         </div>
         <div class="copy-button">
