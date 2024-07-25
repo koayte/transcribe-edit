@@ -96,4 +96,13 @@ textarea {
 
 .copy-button {
     align-self: flex-start;
+    display: flex;
+    gap: 0.6em;
+    align-items: center;
+    margin-top: 0.4em;
+}
+
+.copy-button > p {
+    margin: 0;
+    font-size: 0.8em;
 }

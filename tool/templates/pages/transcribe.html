@@ -11,7 +11,7 @@
             copyText.select();
             copyText.setSelectionRange(0, 99999);
             navigator.clipboard.writeText(copyText.value);
-            
+            document.getElementById("copyAlert").textContent = "Text copied to clipboard."
         }
     </script>
 {% endblock scripts %}
@@ -23,7 +23,10 @@
             <textarea id="transcriptionResults"
                   rows = "10">{{ transcription }}</textarea>
         </div>
-        <button class="copy-button" onclick="copyToClipboard()">Copy</button>
+        <div class="copy-button">
+            <button onclick="copyToClipboard()">Copy</button>
+            <p id="copyAlert"></p>
+        </div>
     </div>
     
     
