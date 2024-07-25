@@ -48,6 +48,7 @@ def home():
 def is_allowed_file(file):
     return file.filename.endswith('.mp3')
 
+######################## TRANSCRIBE ########################
 def transcribe(audio):
     transcribe_model = whisper.load_model("base")
     transcribe_result = transcribe_model.transcribe(audio)
@@ -68,6 +69,14 @@ def upload():
             return render_template("pages/home.html", warning="Please select an .mp3 file.")
 
 
+######################## EDITING ########################
+@bp.route("/edit", methods = ['GET', 'POST'])
+def edit(): 
+    if 'next' in request.form:
+        transcript_res = request.form["transcriptionResults"]
+        return render_template("pages/edit.html", transcript_res=transcript_res)
+    else: 
+        return ('', 204) # return the HTTP 'empty response' response, 204 No Content
 
 @bp.route("/past")
 def past():

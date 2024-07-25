@@ -20,21 +20,40 @@
                 copyAlert.textContent = "";
             }
         }
+
     </script>
 {% endblock scripts %}
 
 {% block content %}
     <p>Transcription results:</p>
-    <div class="transcribe-container">
+    <!-- <div class="content-container">
         <div class="text-container">
             <textarea id="transcriptionResults" oninput="textChanges()"
                   rows = "10">{{ transcription }}</textarea>
         </div>
-        <div class="copy-button">
+        <div class="copy-button-container">
             <button onclick="copyToClipboard()">Copy</button>
             <p id="copyAlert"></p>
         </div>
-    </div>
+        <div class="next-step-container">
+            <button type="button" onclick="window.location.href='{{ url_for( 'pages.edit' ) }}';">Smart Edit >></button>
+        </div>
+    </div> -->
+
+    <form method="post" action="/edit" class="content-container">
+        <textarea name="transcriptionResults" id="transcriptionResults"
+                  oninput="textChanges()"
+                  rows="10">{{ transcription }}</textarea>
+        <div class="buttons-container">
+            <div class="copy-button-container">
+                <button onclick="copyToClipboard()">Copy</button>
+                <p id="copyAlert"></p>
+            </div>
+            <div>
+                <input name="next" type="submit" value="Next: Smart Edit >>">
+            </div>
+        </div>
+    </form>
     
     
     <!-- <div class="content transcribe">

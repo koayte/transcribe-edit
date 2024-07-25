@@ -74,6 +74,16 @@
     font-size: 15px;
     color: red;
   }
+
+/* All Pages */
+.content-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.back-button {
+    align-self: flex-start;
+}
  
 /* Transcribe Page */
 .text-container {
@@ -89,20 +99,26 @@ textarea {
     resize: vertical;
 }
 
-.transcribe-container {
+.buttons-container {
     display: flex;
-    flex-direction: column;
-}
-
-.copy-button {
-    align-self: flex-start;
-    display: flex;
-    gap: 0.6em;
-    align-items: center;
+    justify-content: space-between;
     margin-top: 0.4em;
 }
 
-.copy-button > p {
+.copy-button-container {
+    display: flex;
+    gap: 0.6em;
+    align-items: center;
+    
+}
+
+.copy-button-container > p {
     margin: 0;
     font-size: 0.8em;
 }
+
+.next-step-container {
+    align-self: flex-end;
+}
+
+/* Edit Page */
