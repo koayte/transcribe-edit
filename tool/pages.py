@@ -20,29 +20,7 @@ bp = Blueprint("pages", __name__)
 @bp.route("/", methods = ["GET", "POST"])
 def home():
     
-    # dotenv_path = join(dirname(__file__), '.env')
-    # load_dotenv(dotenv_path)
-    # OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY")
-
-    # response = requests.post(
-    #     url="https://openrouter.ai/api/v1/chat/completions",
-    #     headers={
-    #         "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-    #     },
-    #     data=json.dumps({
-    #         "model": "microsoft/phi-3-mini-128k-instruct:free", 
-    #         "messages": [
-    #         { "role": "user", "content": "What is the meaning of life?" }
-    #         ]
-    #     })
-    # )
-
-    # response_dict = json.loads(response.text)
-    # choices_dict = response_dict.get("choices")[0]
-    # message_dict = choices_dict.get("message")
-    # role = message_dict.get("assistant")
-    # content = message_dict.get("content")
-    # return render_template("pages/home.html", role=role, content=content)
+    
     return render_template("pages/home.html", warning="")
 
 def is_allowed_file(file):
@@ -72,25 +50,57 @@ def upload():
 ######################## EDITING ########################
 @bp.route("/edit", methods = ['GET', 'POST'])
 def edit(): 
-    if 'next' in request.form:
+    # OpenRouter API details 
+    dotenv_path = join(dirname(__file__), '.env')
+    load_dotenv(dotenv_path)
+    OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY")
+    URL = "https://openrouter.ai/api/v1/chat/completions"
+    MODEL = "microsoft/phi-3-mini-128k-instruct:free"
+
+    if 'editSubmit' in request.form:
+        # Get request from user-selected options
         transcript_res = request.form["transcriptionResults"]
-        return render_template("pages/edit.html", transcript_res=transcript_res)
+        if request.form.get('para') and request.form.get('error'):
+            content = """Add paragraph breaks to the following text, and lightly
+                    edit the grammar, spelling and punctuation errors, 
+                    and return only the edited text: """ + transcript_res
+        elif request.form.get('para'):
+            content = """Add paragraph breaks to the following text,
+                    and return only the edited text: """ + transcript_res
+        elif request.form.get('error'):
+            content = """Lightly edit the grammar, spelling and punctuation errors, 
+                    and return only the edited text: """ + transcript_res
+        else:
+            return ('', 204)
+
+        # Send POST request to OpenRouter API 
+        response = requests.post(
+            url=URL,
+            headers={
+                "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+            },
+            data=json.dumps({
+                "model": MODEL, 
+                "messages": [
+                { "role": "user", "content": content }
+                ]
+            })
+        )
+        response_dict = json.loads(response.text)
+        choices_dict = response_dict.get("choices")[0]
+        message_dict = choices_dict.get("message")
+        role = message_dict.get("assistant")
+        reply = message_dict.get("content").strip()
+
+        return render_template("pages/edit.html", edit_res=reply)
     else: 
         return ('', 204) # return the HTTP 'empty response' response, 204 No Content
     
 @bp.route("/edit-results", methods = ['GET', 'POST'])
 def editResults(): 
-    if 'editSubmit' in request.form: 
-        if request.form.get('para') and request.form.get('error'):
-            return 'both'
-        elif request.form.get('para'):
-            return 'para'
-        elif request.form.get('error'):
-            return 'error'
-        else:
-            return 'nothing selected'
-    else:
-        return ('', 204)
+    return "should not exist"
+
+    
 
 @bp.route("/past")
 def past():

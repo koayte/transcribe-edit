@@ -49,11 +49,20 @@
                 <button onclick="copyToClipboard()">Copy</button>
                 <p id="copyAlert"></p>
             </div>
-            <div>
-                <input name="next" type="submit" value="Next >> Smart Edit">
+            <div class="edit-options">
+                <p>Select the smart edit options below:</p>
+                <input type="checkbox" id="para" value="para" name="para">
+                <label for="para">Add paragraph breaks</label><br>
+                <input type="checkbox" id="error" value="error" name="error">
+                <label for="error">Correct grammatical and structural errors</label><br>
+                <input name="editSubmit" type="submit" value="Next >> Smart Edit">
             </div>
+            <!-- <div>
+                <input name="next" type="submit" value="Next >> Smart Edit">
+            </div> -->
         </div>
     </form>
+
     
     
     <!-- <div class="content transcribe">

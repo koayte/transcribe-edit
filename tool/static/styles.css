@@ -102,14 +102,15 @@ textarea {
 .buttons-container {
     display: flex;
     justify-content: space-between;
-    margin-top: 0.4em;
+    align-items: flex-start;
+    margin-top: 0.6em;
+    text-align: left;
 }
 
 .copy-button-container {
     display: flex;
     gap: 0.6em;
     align-items: center;
-    
 }
 
 .copy-button-container > p {
@@ -117,8 +118,8 @@ textarea {
     font-size: 0.8em;
 }
 
-.next-step-container {
-    align-self: flex-end;
+.edit-options > p {
+    margin: 0;
 }
 
 /* Edit Page */
@@ -129,11 +130,20 @@ textarea {
     grid-column-gap: 4em;
 }
 
-.trans-res {
+.edit-text {
     grid-column-start: 1;
     grid-column-end: 2;
 }
 
-.edit-options-container {
+.edit-options {
     grid-column-start: 2;
+}
+
+#editPageTranscriptRes {
+    width: 100%;
+    overflow: auto;
+    padding: 1rem;
+    font-family: inherit;
+    font-size: inherit;
+    resize: none;
 }
