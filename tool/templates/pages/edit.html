@@ -12,9 +12,23 @@
 
 {% block content %}
     <div class="content-container">
+        <!-- <form method="post" action="/upload" class="content-container">
+
+        </form> -->
         <button type="button" class="back-button to-transcribe"
-                >&lt;&lt; Back: Transcribe</button>
-        <p>{{ transcript_res }}</p>
+                >Back &lt;&lt; Transcribe</button>
+        <div class="edit-container">
+            <p>{{ transcript_res }}</p>
+            <div class="edit-options-container">
+                <p>Select the smart edit options below:</p>
+                <input type="checkbox" id="para" value="para">
+                <label for="para">Add paragraph breaks</label><br>
+                <input type="checkbox" id="error" value="error">
+                <label for="error">Correct grammatical and structural errors</label><br>
+            </div>
+            
+        </div>
+        
     </div>
     
     

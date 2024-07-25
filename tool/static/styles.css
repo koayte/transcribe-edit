@@ -122,3 +122,18 @@ textarea {
 }
 
 /* Edit Page */
+.edit-container {
+    display: grid;
+    text-align: left;
+    grid-template-columns: 2fr 1fr;
+    grid-column-gap: 4em;
+}
+
+.trans-res {
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.edit-options-container {
+    grid-column-start: 2;
+}
