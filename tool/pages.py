@@ -93,7 +93,7 @@ def edit():
         role = message_dict.get("assistant")
         reply = message_dict.get("content").strip()
 
-        return render_template("pages/edit.html", edit_res=reply)
+        return render_template("pages/edit.html", edit_res=reply, transcript_res=transcript_res)
     else: 
         return ('', 204) # return the HTTP 'empty response' response, 204 No Content
     
