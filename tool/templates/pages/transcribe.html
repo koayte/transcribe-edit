@@ -25,43 +25,37 @@
 {% endblock scripts %}
 
 {% block content %}
-    <p>Transcription results:</p>
-    <!-- <div class="content-container">
-        <div class="text-container">
-            <textarea id="transcriptionResults" oninput="textChanges()"
-                  rows = "10">{{ transcription }}</textarea>
+    <div class="content-container">
+        <div class="back-button-container">
+            <p>File uploaded: {{ filename }}</p>
+            <button onclick="history.back()">Back &lt;&lt; Upload</button>
         </div>
-        <div class="copy-button-container">
-            <button onclick="copyToClipboard()">Copy</button>
-            <p id="copyAlert"></p>
-        </div>
-        <div class="next-step-container">
-            <button type="button" onclick="window.location.href='{{ url_for( 'pages.edit' ) }}';">Smart Edit >></button>
-        </div>
-    </div> -->
-
-    <form method="post" action="/edit" class="content-container">
-        <textarea name="transcriptionResults" id="transcriptionResults"
-                  oninput="textChanges()"
-                  rows="10">{{ transcription }}</textarea>
-        <div class="buttons-container">
-            <div class="copy-button-container">
-                <button onclick="copyToClipboard()">Copy</button>
-                <p id="copyAlert"></p>
+        <p>Transcription results:</p>
+    
+        <form method="post" action="/edit" class="content-container">
+            <textarea name="transcriptionResults" id="transcriptionResults"
+                      oninput="textChanges()"
+                      rows="10">{{ transcription }}</textarea>
+            <div class="buttons-container">
+                <div class="copy-button-container">
+                    <button onclick="copyToClipboard()">Copy</button>
+                    <p id="copyAlert"></p>
+                </div>
+                <div class="edit-options">
+                    <p>Select the smart edit options below:</p>
+                    <input type="checkbox" id="para" value="para" name="para">
+                    <label for="para">Add paragraph breaks</label><br>
+                    <input type="checkbox" id="error" value="error" name="error">
+                    <label for="error">Correct grammatical and structural errors</label><br>
+                    <input name="editSubmit" type="submit" value="Next >> Smart Edit">
+                </div>
+                <!-- <div>
+                    <input name="next" type="submit" value="Next >> Smart Edit">
+                </div> -->
             </div>
-            <div class="edit-options">
-                <p>Select the smart edit options below:</p>
-                <input type="checkbox" id="para" value="para" name="para">
-                <label for="para">Add paragraph breaks</label><br>
-                <input type="checkbox" id="error" value="error" name="error">
-                <label for="error">Correct grammatical and structural errors</label><br>
-                <input name="editSubmit" type="submit" value="Next >> Smart Edit">
-            </div>
-            <!-- <div>
-                <input name="next" type="submit" value="Next >> Smart Edit">
-            </div> -->
-        </div>
-    </form>
+        </form>
+    </div>
+    
 
     
     
