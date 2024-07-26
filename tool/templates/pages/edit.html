@@ -6,14 +6,36 @@
 
 {% block scripts %}
     <script>
-        
+        function copyToClipboard() {
+            var copyText = document.getElementById("editResults");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value);
+            document.getElementById("copyAlert").textContent = "Text copied to clipboard."
+        }
+
+        function textChanges() {
+            var copyAlert = document.getElementById("copyAlert");
+            if (copyAlert.textContent != "") {
+                copyAlert.textContent = "";
+            }
+        }
     </script>
 {% endblock scripts %}
 
 {% block content %}
     <div class="content-container">
+        <p>Smart Editing results</p>
+        <div class="back-button-container">
+            <button onclick="history.back()">Back &lt;&lt; Transcribe</button>
+        </div>
         <textarea name="editResults" id="editResults"
+                  oninput="textChanges()"
                   rows="10">{{ edit_res }}</textarea>
+        <div class="copy-button-container">
+            <button onclick="copyToClipboard()">Copy</button>
+            <p id="copyAlert"></p>
+        </div>
         <!-- <form method="post" action="/upload" class="content-container">
 
         </form> -->

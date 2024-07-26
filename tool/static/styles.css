@@ -103,7 +103,6 @@ textarea {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-top: 0.6em;
     text-align: left;
 }
 
@@ -111,11 +110,16 @@ textarea {
     display: flex;
     gap: 0.6em;
     align-items: center;
+    margin-top: 0.6em;
 }
 
 .copy-button-container > p {
     margin: 0;
     font-size: 0.8em;
+}
+
+.edit-options {
+    margin-top: 0.6em;
 }
 
 .edit-options > p {
@@ -146,4 +150,9 @@ textarea {
     font-family: inherit;
     font-size: inherit;
     resize: none;
+}
+
+.back-button-container {
+    margin-bottom: 0.6em;
+    align-self: flex-start;
 }

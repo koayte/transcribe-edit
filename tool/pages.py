@@ -41,10 +41,11 @@ def upload():
         if audio and is_allowed_file(audio):
             filepath = "user-uploads/" + audio.filename
             audio.save(filepath)
-            # transcription = transcribe(filepath).strip()
-            return render_template("pages/transcribe.html", transcription="Hello, I'm going to be showing you how you can control students' individual access to a particular quiz using the teacher portal. So from your teacher portal, go to your classroom, click on the quizzes tab, and you can select what quiz you want to manage access to. So for instance, this one, select the start time, and the end time, which is set at default to one hour. Click on save first, and then you can select the students whom you want to manage access to. So for instance, all three students, we can unlock the quiz for them. And now this quiz is accessible to these three unlock students during this time period. You can also select whether you want to show the grades and or the correct answers after the quiz is submitted. And there we have it.")
+            transcription = transcribe(filepath).strip()
+            return render_template("pages/transcribe.html", transcription=transcription)
         else:
             return render_template("pages/home.html", warning="Please select an .mp3 file.")
+    # "Hello, I'm going to be showing you how you can control students' individual access to a particular quiz using the teacher portal. So from your teacher portal, go to your classroom, click on the quizzes tab, and you can select what quiz you want to manage access to. So for instance, this one, select the start time, and the end time, which is set at default to one hour. Click on save first, and then you can select the students whom you want to manage access to. So for instance, all three students, we can unlock the quiz for them. And now this quiz is accessible to these three unlock students during this time period. You can also select whether you want to show the grades and or the correct answers after the quiz is submitted. And there we have it."
 
 
 ######################## EDITING ########################
