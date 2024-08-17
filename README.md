@@ -16,3 +16,10 @@ It uses the following models:
 ## Running the web app 
 1. Run `python -m flask --app tool run --port 8000`
 2. Open the web app on `localhost:8000` in your Chrome browser. 
+
+## Technologies
+- Flask 
+- Python 
+- HTML 
+- JavaScript 
+- CSS

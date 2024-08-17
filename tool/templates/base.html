@@ -3,9 +3,9 @@
     <head>
         <title>Transcribe and Edit - {% block title %}{% endblock title %}</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        
     </head>
     <body>
-        {% block scripts %}{% endblock scripts %}
         <h1>Smart Audio Transcription and Editing</h1>
         {% include("_navigation.html") %}
         <section>
@@ -16,5 +16,6 @@
                 {% block content %}<p>No messages.</p>{% endblock content %}
             </main>
         </section>
+        {% block scripts %}{% endblock scripts %}
     </body>
 </html>

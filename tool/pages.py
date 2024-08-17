@@ -26,7 +26,12 @@ def home():
 def is_allowed_file(file):
     return file.filename.endswith('.mp3')
 
-######################## TRANSCRIBE ########################
+######################## LIVE REAL-TIME TRANSCRIBE ########################
+@bp.route("/record", methods = ['POST'])
+def record():
+    return "test"
+
+######################## POST-UPLOAD TRANSCRIBE ########################
 def transcribe(audio):
     transcribe_model = whisper.load_model("base")
     transcribe_result = transcribe_model.transcribe(audio)

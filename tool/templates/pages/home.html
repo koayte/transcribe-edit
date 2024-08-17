@@ -5,9 +5,55 @@
 {% endblock header %}
 
 {% block scripts %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
-        console.log("Hello world!");
+    <script type="text/javascript">
+        navigator.mediaDevices.getUserMedia({audio: true}).then(stream => {handlerFunction(stream)});
+        console.log("Test");
+
+        const startRecord = document.getElementById("startRecord");
+        const stopRecord = document.getElementById("stopRecord");
+
+        function handlerFunction(stream) {
+            rec = new MediaRecorder(stream);
+            rec.ondataavailable = e => {
+                audioChunks.push(e.data);
+                if (rec.state == "inactive") {
+                    let blob = new Blob(audioChunks, {type: 'audio/mpeg-3'});
+                    const recordedAudio = document.getElementById("recordedAudio");
+                    recordedAudio.src = URL.createObjectURL(blob);
+                    recordedAudio.controls = true;
+                    recordedAudio.autoplay = false;
+                    return blob;
+                }
+            }
+        }
+
+        // function sendData(data) {
+        //     var form = new FormData();
+        //     form.append('file', data, 'recording.mp3');
+        //     form.append('title', 'recording.mp3');
+        //     console.log(data);
+        // }
+
+
+        startRecord.onclick = e => {
+            console.log('Recording started');
+            startRecord.disabled = true;
+            stopRecord.disabled = false;
+            audioChunks = [];
+            rec.start();
+        }
+
+        stopRecord.onclick = e => {
+            console.log('Recording stopped');
+            startRecord.disabled = false;
+            stopRecord.disabled = true;
+            rec.stop();
+        }
+
     </script>
+    <!-- <script type="text/javascript">
+        console.log("Hello world!");
+    </script> -->
 {% endblock scripts %}
 
 {% block content %}
@@ -17,6 +63,17 @@
             <div>
                 <h3>Record</h3>
                 <p>Enable browser access to your microphone.</p>
+                <p>
+                    <button id="startRecord">Start recording</button>
+                    <button id="stopRecord" disabled>Stop recording</button>
+                </p>
+                <audio id="recordedAudio"></audio>
+                <form action="/record", method="post">
+                    <input type="submit" value="Submit"/>
+                </form>
+                <!-- <form action="/record", method="post" enctype="multipart/form-data">
+                    <input type="submit" value="Start recording"/>
+                </form> -->
             </div>
         </div>
 
