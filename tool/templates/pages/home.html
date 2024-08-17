@@ -5,8 +5,12 @@
 {% endblock header %}
 
 {% block scripts %}
-    <script type="text/javascript">
-        navigator.mediaDevices.getUserMedia({audio: true}).then(stream => {handlerFunction(stream)});
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        const submitRecord = document.getElementById("submitRecord");
+
+        navigator.mediaDevices.getUserMedia({audio: true})
+                              .then(stream => {handlerFunction(stream)});
         console.log("Test");
 
         const startRecord = document.getElementById("startRecord");
@@ -22,9 +26,31 @@
                     recordedAudio.src = URL.createObjectURL(blob);
                     recordedAudio.controls = true;
                     recordedAudio.autoplay = false;
-                    return blob;
+                    sendData(blob);
                 }
             }
+        }
+
+        function sendData(blob) {
+            var form = new FormData();
+            form.append('file', blob, 'recording.mp3');
+            form.append('title', 'recording.mp3');
+            $.ajax({
+                type: 'POST',
+                url: '/record',
+                data: form, 
+                cache: false, 
+                processData: false, 
+                contentType: false
+            }).done(function(data) {
+                console.log(data);
+            });
+        
+            // var xhr = new XMLHttpRequest();
+            // xhr.open('POST', '/record', true);
+            // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded/")
+            // xhr.send(form);
+            // console.log("test");
         }
 
         // function sendData(data) {
@@ -68,9 +94,11 @@
                     <button id="stopRecord" disabled>Stop recording</button>
                 </p>
                 <audio id="recordedAudio"></audio>
-                <form action="/record", method="post">
+                <button id="submitRecord">Submit</button>
+                <!-- <form action="/record", method="post">
+                    
                     <input type="submit" value="Submit"/>
-                </form>
+                </form> -->
                 <!-- <form action="/record", method="post" enctype="multipart/form-data">
                     <input type="submit" value="Start recording"/>
                 </form> -->

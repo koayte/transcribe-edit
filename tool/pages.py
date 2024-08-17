@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template, request, Flask
+from flask import Blueprint, render_template, request, Flask, flash, redirect
 import os, requests, json
 from os.path import join, dirname
+import uuid 
 
 # Env 
 from dotenv import load_dotenv
@@ -29,7 +30,21 @@ def is_allowed_file(file):
 ######################## LIVE REAL-TIME TRANSCRIBE ########################
 @bp.route("/record", methods = ['POST'])
 def record():
-    return "test"
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        file_name = str(uuid.uuid4()) + ".mp3"
+        full_file_name = "user-uploads/" + file_name
+        file.save(full_file_name)
+        return '<h1>Success</h1>'
+
+        
+        
 
 ######################## POST-UPLOAD TRANSCRIBE ########################
 def transcribe(audio):
